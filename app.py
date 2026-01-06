@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Cek Kelayakan Ikan", layout="centered")
 
-st.title("🐟 Aplikasi Cek Kelayakan Bahan Pangan (Ikan)")
+st.title("🐡 Aplikasi Cek Kelayakan Bahan Pangan (Ikan)")
 st.write("Aplikasi ini membantu menilai kelayakan ikan segar berdasarkan parameter mutu pangan.")
 
 # Input
