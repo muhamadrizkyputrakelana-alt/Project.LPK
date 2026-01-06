@@ -29,7 +29,7 @@ menu = st.sidebar.radio(
 )
 
 # ======================
-# HEADER
+# HEADER UTAMA
 # ======================
 st.markdown(
     """
@@ -49,20 +49,31 @@ st.markdown(
 st.write("")
 
 # ======================
-# BERANDA
+# BERANDA (INHERIT MODE GELAP & TERANG)
 # ======================
 if menu == "🏠 Beranda":
+    st.subheader("📌 Tentang Aplikasi")
+
+    st.write(
+        """
+        *SIKAPAN (Sistem Informasi Kelayakan dan Pengolahan Bahan Pangan)*  
+        adalah aplikasi berbasis web yang membantu pengguna menilai
+        *kelayakan konsumsi bahan pangan* secara sederhana dan praktis
+        berdasarkan:
+        """
+    )
+
     st.markdown(
         """
-        <div style="background:#f1f8e9; padding:22px; border-radius:14px;">
-            <p>
-            <b>SIKAPAN</b> membantu mengevaluasi kelayakan bahan pangan
-            berdasarkan indikator fisik dan kondisi penyimpanan
-            (suhu ruang atau kulkas).
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
+        - Kondisi fisik bahan pangan  
+        - Indikator sensorik (bau, tekstur, warna)  
+        - Lama dan suhu penyimpanan (suhu ruang atau kulkas)  
+        """
+    )
+
+    st.info(
+        "Aplikasi ini bersifat *edukatif* dan dapat digunakan oleh mahasiswa, "
+        "pelaku UMKM pangan, maupun masyarakat umum."
     )
 
 # ======================
@@ -126,9 +137,15 @@ elif menu == "🥚 Kesegaran Telur":
     col1, col2 = st.columns(2)
     with col1:
         bau = st.selectbox("Bau Telur", ["Tidak berbau", "Amis", "Busuk"])
-        cangkang = st.selectbox("Kondisi Cangkang", ["Utuh & bersih", "Retak", "Kotor / berlendir"])
+        cangkang = st.selectbox(
+            "Kondisi Cangkang",
+            ["Utuh & bersih", "Retak", "Kotor / berlendir"]
+        )
     with col2:
-        uji_air = st.selectbox("Uji Apung", ["Tenggelam & rebah", "Tenggelam berdiri", "Mengapung"])
+        uji_air = st.selectbox(
+            "Uji Apung",
+            ["Tenggelam & rebah", "Tenggelam berdiri", "Mengapung"]
+        )
         suhu = st.selectbox("Suhu Penyimpanan", ["Suhu ruang", "Kulkas"])
         hari = st.number_input("Lama Penyimpanan (hari)", min_value=0, step=1)
 
