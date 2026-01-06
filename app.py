@@ -72,7 +72,7 @@ if lama > 24:
 
 # Output
 if st.button("🔍 Cek Kelayakan"):
-    st.subheader("📊 Hasil Penilaian")
+    st.subheader("📝 Hasil Penilaian")
     st.write(f"**Skor Kelayakan:** {persen:.0f}%")
 
     if persen >= 80:
