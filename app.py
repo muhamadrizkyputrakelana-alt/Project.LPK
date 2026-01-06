@@ -19,9 +19,9 @@ menu = st.sidebar.radio(
         "🐟 Kesegaran Ikan",
         "🥩 Kesegaran Daging",
         "🥚 Kesegaran Telur"
-    ],
-    key="menu_utama"
+    ]
 )
+
 # ======================
 # BERANDA
 # ======================
@@ -31,30 +31,21 @@ if menu == "🏠 Beranda":
     st.subheader("Sistem Informasi Kelayakan dan Pengolahan Bahan Pangan")
 
     st.write(
-        "SIKAPAN adalah aplikasi berbasis web yang dirancang untuk membantu "
-        "pengguna dalam menentukan kelayakan bahan pangan sebelum digunakan."
+        "SIKAPAN adalah aplikasi berbasis web untuk membantu evaluasi "
+        "kelayakan bahan pangan sebelum dikonsumsi atau diolah."
     )
 
-    st.write(
-        "Aplikasi ini menyediakan panduan evaluasi kondisi bahan pangan, "
-        "teknik penyimpanan yang tepat, serta rekomendasi pengolahan agar "
-        "mutu dan kandungan gizi tetap terjaga."
-    )
-
-    st.subheader("🎯 Tujuan Aplikasi")
     st.markdown(
         """
-        - Memudahkan evaluasi kelayakan bahan pangan  
-        - Memberikan panduan penyimpanan yang benar  
-        - Menyediakan rekomendasi pengolahan yang aman  
-        - Mengurangi risiko konsumsi bahan pangan tidak layak  
+        ### 🎯 Tujuan Aplikasi
+        - Evaluasi kelayakan bahan pangan  
+        - Panduan penyimpanan yang aman  
+        - Rekomendasi pengolahan  
+        - Mengurangi risiko pangan tidak layak  
         """
     )
 
-    st.info(
-        "👉 Gunakan menu di sidebar untuk memilih jenis bahan pangan "
-        "dan mendapatkan evaluasi kelayakan."
-    )
+    st.info("👉 Pilih jenis bahan pangan melalui menu di sidebar")
 
 # ======================
 # HALAMAN IKAN
@@ -111,61 +102,82 @@ elif menu == "🐟 Kesegaran Ikan":
         if bau == "Busuk" or tekstur == "Lembek" or hari > batas_hari:
             st.error("❌ Ikan TIDAK LAYAK digunakan")
 
+        elif indikator >= 2:
+            st.warning("⚠️ Kesegaran ikan menurun")
+
+        else:
+            st.success("✅ Ikan MASIH LAYAK digunakan")
+
 # ======================
-# HALAMAN KESEGARAN TELUR
+# HALAMAN DAGING
+# ======================
+elif menu == "🥩 Kesegaran Daging":
+
+    st.header("🥩 Evaluasi Kesegaran Daging")
+
+    bau = st.selectbox(
+        "Bau Daging",
+        ["Normal", "Agak asam", "Busuk"]
+    )
+
+    warna = st.selectbox(
+        "Warna Daging",
+        ["Merah cerah", "Merah pucat", "Kecoklatan"]
+    )
+
+    tekstur = st.selectbox(
+        "Tekstur",
+        ["Kenyal", "Agak lembek", "Lembek"]
+    )
+
+    if st.button("🔍 Evaluasi Kelayakan Daging"):
+
+        if bau == "Busuk" or tekstur == "Lembek":
+            st.error("❌ Daging TIDAK LAYAK konsumsi")
+        elif bau != "Normal" or warna != "Merah cerah":
+            st.warning("⚠️ Kualitas daging menurun")
+        else:
+            st.success("✅ Daging MASIH LAYAK konsumsi")
+
+# ======================
+# HALAMAN TELUR
 # ======================
 elif menu == "🥚 Kesegaran Telur":
 
-    st.markdown("## 🥚 Evaluasi Kesegaran Telur")
+    st.header("🥚 Evaluasi Kesegaran Telur")
 
     bau = st.selectbox(
         "Bau Telur",
-        ["Tidak berbau", "Sedikit amis", "Busuk"],
-        key="bau_telur"
+        ["Tidak berbau", "Sedikit amis", "Busuk"]
     )
 
     uji_air = st.selectbox(
         "Uji Apung (Tes Air)",
-        ["Tenggelam & rebah", "Tenggelam berdiri", "Mengapung"],
-        key="air_telur"
+        ["Tenggelam & rebah", "Tenggelam berdiri", "Mengapung"]
     )
 
     cangkang = st.selectbox(
         "Kondisi Cangkang",
-        ["Bersih & utuh", "Retak halus", "Pecah / berlendir"],
-        key="cangkang_telur"
+        ["Bersih & utuh", "Retak halus", "Pecah / berlendir"]
     )
 
     putih_telur = st.selectbox(
         "Kondisi Putih Telur",
-        ["Kental & melekat", "Agak encer", "Sangat encer"],
-        key="putih_telur"
+        ["Kental & melekat", "Agak encer", "Sangat encer"]
     )
 
     hari = st.number_input(
         "Lama Penyimpanan (hari)",
         min_value=0,
-        step=1,
-        key="hari_telur"
+        step=1
     )
 
     suhu = st.selectbox(
         "Suhu Penyimpanan",
-        ["Suhu ruang", "Kulkas"],
-        key="suhu_telur"
+        ["Suhu ruang", "Kulkas"]
     )
 
-    if st.button("🔍 Evaluasi Kelayakan Telur", key="eval_telur"):
-
-        indikator = 0
-        if bau != "Tidak berbau":
-            indikator += 1
-        if uji_air != "Tenggelam & rebah":
-            indikator += 1
-        if cangkang != "Bersih & utuh":
-            indikator += 1
-        if putih_telur != "Kental & melekat":
-            indikator += 1
+    if st.button("🔍 Evaluasi Kelayakan Telur"):
 
         batas = 7 if suhu == "Suhu ruang" else 21
 
@@ -175,22 +187,8 @@ elif menu == "🥚 Kesegaran Telur":
         elif hari > batas:
             st.warning("⚠️ Telur melewati batas penyimpanan aman")
 
-        elif indikator >= 2:
+        elif putih_telur != "Kental & melekat":
             st.warning("⚠️ Kualitas telur menurun")
 
         else:
             st.success("✅ Telur MASIH LAYAK konsumsi")
-
-        st.markdown("### 🧊 Panduan Penyimpanan")
-        st.write(
-            "- Simpan dalam wadah tertutup\n"
-            "- Jangan dicuci sebelum disimpan\n"
-            "- Letakkan di rak dalam kulkas"
-        )
-
-        st.markdown("### 🍳 Rekomendasi Pengolahan")
-        st.write(
-            "- Masak hingga matang sempurna\n"
-            "- Hindari konsumsi mentah\n"
-            "- Cocok direbus atau digoreng matang"
-        )
