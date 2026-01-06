@@ -7,7 +7,7 @@ st.write("Aplikasi ini membantu menilai kelayakan ikan segar berdasarkan paramet
 
 # Input
 suhu = st.number_input("Suhu penyimpanan (°C)", 0.0, 30.0, 4.0)
-ph = st.number_input("pH daging ikan", 5.0, 8.0, 6.5)
+
 bau = st.selectbox("Bau ikan", ["Normal", "Agak amis", "Busuk"])
 insang = st.selectbox("Warna insang", ["Merah cerah", "Pucat", "Coklat"])
 tekstur = st.selectbox("Tekstur daging", ["Kenyal", "Agak lembek", "Lembek"])
