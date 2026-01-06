@@ -189,7 +189,7 @@ elif menu == "🥚 Kesegaran Telur":
         )
 
         st.markdown("### 🍳 Rekomendasi Pengolahan")
-        st.write(
+        st.write
             "- Masak hingga matang sempurna\n"
             "- Hindari konsumsi mentah\n"
             "- Cocok direbus atau digoreng matang"
