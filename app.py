@@ -16,7 +16,7 @@ st.sidebar.markdown(
     """
     <div style="text-align:center;">
         <h2>🥗 SIKAPAN</h2>
-        <p style="font-size:22px;">🍳 🐟 🥩 🥚 🥬 🍎</p>
+        <p style="font-size:22px;">🍳 🐟 🥩 🥚</p>
         <hr>
     </div>
     """,
@@ -25,16 +25,11 @@ st.sidebar.markdown(
 
 menu = st.sidebar.radio(
     "📂 Menu",
-    [
-        "🏠 Beranda",
-        "🐟 Kesegaran Ikan",
-        "🥩 Kesegaran Daging",
-        "🥚 Kesegaran Telur"
-    ]
+    ["🏠 Beranda", "🐟 Kesegaran Ikan", "🥩 Kesegaran Daging", "🥚 Kesegaran Telur"]
 )
 
 # ======================
-# HEADER UTAMA
+# HEADER
 # ======================
 st.markdown(
     """
@@ -61,22 +56,17 @@ if menu == "🏠 Beranda":
         """
         <div style="background:#f1f8e9; padding:22px; border-radius:14px;">
             <p>
-            <b>SIKAPAN</b> adalah aplikasi berbasis web untuk membantu mengevaluasi
-            kelayakan bahan pangan berdasarkan indikator fisik sederhana,
-            kondisi penyimpanan, dan keamanan konsumsi.
+            <b>SIKAPAN</b> membantu mengevaluasi kelayakan bahan pangan
+            berdasarkan indikator fisik dan kondisi penyimpanan
+            (suhu ruang atau kulkas).
             </p>
-            <ul>
-                <li>Menilai kesegaran bahan pangan</li>
-                <li>Memberi panduan penyimpanan</li>
-                <li>Menyarankan konsumsi yang aman</li>
-            </ul>
         </div>
         """,
         unsafe_allow_html=True
     )
 
 # ======================
-# HALAMAN IKAN
+# IKAN
 # ======================
 elif menu == "🐟 Kesegaran Ikan":
     st.subheader("🐟 Evaluasi Kesegaran Ikan")
@@ -91,7 +81,10 @@ elif menu == "🐟 Kesegaran Ikan":
         hari = st.number_input("Lama Penyimpanan (hari)", min_value=0, step=1)
 
     if st.button("🔍 Evaluasi Ikan"):
-        batas = 1 if suhu == "Suhu ruang" else (2 if jenis == "Ikan Laut" else 3)
+        if suhu == "Suhu ruang":
+            batas = 1
+        else:
+            batas = 2 if jenis == "Ikan Laut" else 3
 
         if bau == "Busuk" or tekstur == "Lembek" or hari > batas:
             st.error("❌ Ikan TIDAK LAYAK dikonsumsi")
@@ -99,7 +92,7 @@ elif menu == "🐟 Kesegaran Ikan":
             st.success("✅ Ikan MASIH LAYAK dikonsumsi")
 
 # ======================
-# HALAMAN DAGING
+# DAGING
 # ======================
 elif menu == "🥩 Kesegaran Daging":
     st.subheader("🥩 Evaluasi Kesegaran Daging")
@@ -114,7 +107,10 @@ elif menu == "🥩 Kesegaran Daging":
         hari = st.number_input("Lama Penyimpanan (hari)", min_value=0, step=1)
 
     if st.button("🔍 Evaluasi Daging"):
-        batas = 1 if suhu == "Suhu ruang" else (2 if jenis == "Ayam" else 3)
+        if suhu == "Suhu ruang":
+            batas = 1
+        else:
+            batas = 2 if jenis == "Ayam" else 3
 
         if bau == "Busuk" or lendir == "Berlendir" or hari > batas:
             st.error("❌ Daging TIDAK LAYAK dikonsumsi")
@@ -122,7 +118,7 @@ elif menu == "🥩 Kesegaran Daging":
             st.success("✅ Daging MASIH LAYAK dikonsumsi")
 
 # ======================
-# HALAMAN TELUR
+# TELUR
 # ======================
 elif menu == "🥚 Kesegaran Telur":
     st.subheader("🥚 Evaluasi Kesegaran Telur")
