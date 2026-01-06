@@ -31,6 +31,44 @@ if lama <= 24:
     score += 1
 
 persen = (score / maks) * 100
+catatan = []
+
+if suhu > 4:
+    catatan.append(
+        "Suhu penyimpanan melebihi 4°C sehingga mempercepat pertumbuhan mikroorganisme "
+        "pembusuk dan aktivitas enzim, yang berdampak pada penurunan kesegaran ikan."
+    )
+
+if not (6.0 <= ph <= 6.8):
+    catatan.append(
+        "Nilai pH daging ikan berada di luar rentang normal. Perubahan pH umumnya "
+        "berkaitan dengan proses autolisis dan aktivitas bakteri yang menghasilkan "
+        "senyawa basa volatil."
+    )
+
+if bau != "Normal":
+    catatan.append(
+        "Perubahan bau menunjukkan terbentuknya senyawa volatil seperti amonia "
+        "dan trimetilamina akibat degradasi protein oleh mikroorganisme."
+    )
+
+if insang != "Merah cerah":
+    catatan.append(
+        "Warna insang yang pucat atau kecoklatan mengindikasikan oksidasi pigmen "
+        "dan penurunan kualitas ikan selama penyimpanan."
+    )
+
+if tekstur != "Kenyal":
+    catatan.append(
+        "Tekstur daging yang melembek disebabkan oleh kerusakan struktur protein "
+        "dan jaringan otot akibat aktivitas enzim proteolitik."
+    )
+
+if lama > 24:
+    catatan.append(
+        "Lama penyimpanan yang melebihi 24 jam berpotensi meningkatkan jumlah "
+        "mikroorganisme pembusuk sehingga mutu ikan menurun secara signifikan."
+    )
 
 # Output
 if st.button("🔍 Cek Kelayakan"):
